@@ -1,0 +1,35 @@
+---
+# tasks file for practice
+- name: Install Nginx
+  yum:
+    name: "{{ nginx_package }}"
+    state: present
+
+- name: Start Nginx
+  service:
+    name: "{{ nginx_service }}"
+    state: started
+
+- name: Copy file
+  copy:
+    src: "{{ file_src }}"
+    dest: "{{ file_dest }}"
+    owner: "{{ file_owner }}"
+    group: "{{ file_group }}"
+
+- name: Set read-only permission for copied files
+  file:
+    path: "{{ file_dest }}"
+    state: file
+    mode: '0400'
+    owner: "{{ file_owner }}"
+    group: "{{ file_group }}"
+
+- name: Create a directory using shell
+  shell: mkdir -p "{{ directory_path }}"  # -p ensures no error if the directory exists
+
+- name: Ensure Nginx is started and enabled
+  systemd:
+    name: "{{ nginx_service }}"
+    enabled: yes
+    state: started

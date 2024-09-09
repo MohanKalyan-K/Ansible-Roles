@@ -1,0 +1,9 @@
+---
+# defaults file for practice
+nginx_package: nginx
+nginx_service: nginx
+file_src: /home/ec2-user/testfile
+file_dest: /home/ec2-user/testfile
+file_owner: ec2-user
+file_group: ec2-user
+directory_path: /home/ec2-user/kalyan
